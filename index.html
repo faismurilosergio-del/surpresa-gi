@@ -659,6 +659,164 @@ body.dark .mood-inner{background:#1A1118}
 .sp-blurred-val.clear{filter:blur(0)}
 .sp-blurred-lbl{font-size:12px;color:rgba(255,255,255,.5);letter-spacing:.05em}
 .sp-blurred-icon{font-size:20px}
+
+/* ─── DAY 01: MEMORY GAME ─── */
+.sp-mem-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:16px 0;max-width:340px;margin-left:auto;margin-right:auto}
+.sp-mem-card{aspect-ratio:1;background:linear-gradient(135deg,#C2476B,#9E2E51);border-radius:10px;cursor:pointer;display:flex;justify-content:center;align-items:center;font-size:26px;transition:all .3s;transform-style:preserve-3d;position:relative;border:none;color:#fff;font-weight:500}
+.sp-mem-card.flipped{background:#fff;transform:rotateY(0)}
+.sp-mem-card.matched{background:rgba(184,149,90,.3);border:2px solid #B8955A;animation:matchedPulse .6s}
+@keyframes matchedPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+.sp-mem-card .face-back{opacity:1;color:#fff;font-size:18px}
+.sp-mem-card.flipped .face-back{display:none}
+.sp-mem-card .face-front{display:none}
+.sp-mem-card.flipped .face-front,.sp-mem-card.matched .face-front{display:block}
+.sp-mem-status{font-size:13px;color:rgba(255,255,255,.7);text-align:center;margin:10px 0;min-height:20px}
+
+/* ─── DAY 02: COIN FLIP ─── */
+.sp-coin{width:140px;height:140px;margin:20px auto;perspective:1000px}
+.sp-coin-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform 1.5s cubic-bezier(.4,.2,.3,1)}
+.sp-coin-inner.flipping{transition:transform 2s cubic-bezier(.4,.2,.3,1)}
+.sp-coin-face{position:absolute;inset:0;border-radius:50%;display:flex;justify-content:center;align-items:center;font-family:'Playfair Display',serif;font-weight:500;font-size:28px;backface-visibility:hidden;border:4px solid #B8955A;box-shadow:0 8px 24px rgba(184,149,90,.4)}
+.sp-coin-face.heads{background:radial-gradient(circle,#FCE7AE,#B8955A);color:#5C3F1A}
+.sp-coin-face.tails{background:radial-gradient(circle,#E8D4A8,#8B6B3F);color:#5C3F1A;transform:rotateY(180deg)}
+.sp-coin-btn{display:block;margin:14px auto;padding:11px 28px;background:#C2476B;color:#fff;border:none;border-radius:24px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;transition:all .2s}
+.sp-coin-btn:hover:not(:disabled){background:#9E2E51;transform:translateY(-2px)}
+.sp-coin-btn:disabled{opacity:.4;cursor:not-allowed}
+.sp-coin-result{min-height:60px;font-size:14px;color:rgba(255,255,255,.85);line-height:1.5;text-align:center;padding:14px;background:rgba(194,71,107,.08);border-radius:10px;margin:14px 0;display:none}
+.sp-coin-result.on{display:block;animation:fadeInUp .4s ease}
+.sp-coin-result .reveal{font-family:'Playfair Display',serif;font-size:22px;color:#F5D0DC;font-style:italic;display:block;margin-top:6px;letter-spacing:.2em}
+
+/* ─── DAY 04: WORDLE / TERMO ─── */
+.sp-wordle-board{display:grid;grid-template-rows:repeat(6,1fr);gap:5px;max-width:280px;margin:14px auto}
+.sp-wordle-row{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
+.sp-wordle-cell{aspect-ratio:1;display:flex;justify-content:center;align-items:center;background:rgba(255,255,255,.05);border:2px solid rgba(255,255,255,.15);border-radius:6px;font-family:'Playfair Display',serif;font-size:22px;font-weight:500;color:#fff;text-transform:uppercase;transition:all .3s}
+.sp-wordle-cell.filled{border-color:rgba(255,255,255,.4);animation:wcellPop .2s}
+@keyframes wcellPop{0%{transform:scale(.9)}50%{transform:scale(1.05)}100%{transform:scale(1)}}
+.sp-wordle-cell.correct{background:#4A7C59;border-color:#4A7C59;color:#fff}
+.sp-wordle-cell.present{background:#B8955A;border-color:#B8955A;color:#fff}
+.sp-wordle-cell.absent{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.07);color:rgba(255,255,255,.5)}
+.sp-wordle-kb{display:flex;flex-direction:column;gap:4px;margin:12px 0;max-width:340px;margin-left:auto;margin-right:auto}
+.sp-wordle-kb-row{display:flex;gap:3px;justify-content:center}
+.sp-wordle-key{flex:1;min-width:22px;max-width:32px;padding:8px 0;background:rgba(255,255,255,.1);border:none;border-radius:5px;color:#fff;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:all .15s}
+.sp-wordle-key.wide{max-width:54px;font-size:10px;letter-spacing:.05em}
+.sp-wordle-key:hover{background:rgba(255,255,255,.18)}
+.sp-wordle-key.correct{background:#4A7C59}
+.sp-wordle-key.present{background:#B8955A}
+.sp-wordle-key.absent{background:rgba(255,255,255,.03);color:rgba(255,255,255,.3)}
+.sp-wordle-hint{font-size:13px;color:rgba(255,255,255,.55);text-align:center;font-style:italic;margin:8px 0;min-height:18px}
+
+/* ─── DAY 05: SLIDERS GUESS ─── */
+.sp-slider-q{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:16px;margin-bottom:12px}
+.sp-slider-q-text{font-size:14px;color:#fff;margin-bottom:10px;line-height:1.4}
+.sp-slider-range{width:100%;-webkit-appearance:none;appearance:none;height:6px;background:linear-gradient(90deg,rgba(255,255,255,.1),rgba(194,71,107,.4));border-radius:3px;outline:none}
+.sp-slider-range::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:22px;height:22px;border-radius:50%;background:#C2476B;cursor:pointer;border:3px solid #fff;box-shadow:0 4px 14px rgba(194,71,107,.4)}
+.sp-slider-range::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:#C2476B;cursor:pointer;border:3px solid #fff}
+.sp-slider-val{font-family:'Playfair Display',serif;font-size:22px;color:#F5D0DC;font-weight:500;text-align:center;margin-top:8px}
+.sp-slider-feedback{font-size:12px;color:rgba(255,255,255,.6);text-align:center;margin-top:4px;min-height:18px;font-style:italic}
+.sp-slider-feedback.hot{color:#C2476B;font-weight:500}
+.sp-slider-feedback.warm{color:#B8955A}
+
+/* ─── DAY 06: WHO SAID IT ─── */
+.sp-whosaid-phrase{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:12px 16px;margin-bottom:10px;font-family:'Playfair Display',serif;font-style:italic;font-size:14px;color:#fff;cursor:grab;user-select:none;transition:all .2s;line-height:1.4}
+.sp-whosaid-phrase.dragging{opacity:.5;transform:scale(.95)}
+.sp-whosaid-zones{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.sp-whosaid-zone{min-height:80px;border:2px dashed rgba(255,255,255,.2);border-radius:12px;padding:12px;background:rgba(255,255,255,.02)}
+.sp-whosaid-zone.s{border-color:rgba(255,255,255,.25)}
+.sp-whosaid-zone.g{border-color:rgba(194,71,107,.4)}
+.sp-whosaid-zone.over{background:rgba(194,71,107,.1);border-style:solid}
+.sp-whosaid-zone-title{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:8px;text-align:center;font-weight:500}
+.sp-whosaid-zone.s .sp-whosaid-zone-title{color:rgba(255,255,255,.7)}
+.sp-whosaid-zone.g .sp-whosaid-zone-title{color:#C2476B}
+.sp-whosaid-drop{font-size:11px;background:rgba(0,0,0,.3);border-radius:6px;padding:5px 8px;margin-bottom:4px;display:flex;justify-content:space-between;align-items:center;gap:6px;animation:fadeInUp .3s}
+.sp-whosaid-drop.right{background:rgba(74,124,89,.25);color:#A8D9B4}
+.sp-whosaid-drop.wrong{background:rgba(194,71,107,.25);color:#F5D0DC}
+.sp-whosaid-result{text-align:center;font-size:14px;color:#F5D0DC;font-style:italic;margin:12px 0;min-height:20px}
+
+/* ─── DAY 08: CANDLES ─── */
+.sp-candles-wrap{position:relative;margin:14px auto;width:100%;max-width:340px;height:200px}
+.sp-cake-base{position:absolute;bottom:0;left:10%;right:10%;height:80px;background:linear-gradient(180deg,#F5D0DC 0%,#C2476B 40%,#9E2E51 100%);border-radius:6px 6px 12px 12px;box-shadow:0 6px 20px rgba(194,71,107,.4)}
+.sp-cake-base::before{content:"";position:absolute;top:8px;left:0;right:0;height:8px;background:#fff;border-radius:2px;opacity:.4}
+.sp-candles{position:absolute;bottom:80px;left:0;right:0;display:flex;justify-content:center;gap:8px;flex-wrap:wrap;padding:0 20px}
+.sp-candle{width:8px;height:50px;background:linear-gradient(180deg,#F5D0DC,#fff);border-radius:2px;position:relative;cursor:pointer;transition:transform .15s}
+.sp-candle:hover{transform:translateY(-3px)}
+.sp-candle::before{content:"";position:absolute;top:-2px;left:50%;transform:translateX(-50%);width:1px;height:6px;background:#666}
+.sp-flame{position:absolute;top:-18px;left:50%;transform:translateX(-50%);width:12px;height:18px;border-radius:50% 50% 30% 30%;background:radial-gradient(ellipse at bottom,#FFD700,#FF6B00 60%,transparent 100%);opacity:0;transition:opacity .3s;animation:flicker .4s infinite alternate}
+.sp-candle.lit .sp-flame{opacity:1}
+@keyframes flicker{from{transform:translateX(-50%) scale(1)}to{transform:translateX(-50%) scale(1.1) translateY(-2px)}}
+.sp-candles-counter{text-align:center;font-size:13px;color:rgba(255,255,255,.7);margin:8px 0}
+.sp-wish-input{width:100%;padding:14px 16px;border:1px solid rgba(194,71,107,.4);border-radius:10px;font-size:14px;font-family:'DM Sans',sans-serif;background:rgba(255,255,255,.06);color:#fff;outline:none;margin:8px 0;display:none}
+.sp-wish-input.on{display:block;animation:fadeInUp .4s ease}
+.sp-wish-input:focus{border-color:#C2476B;box-shadow:0 0 0 3px rgba(194,71,107,.15)}
+.sp-wish-confirm{text-align:center;font-family:'Playfair Display',serif;font-style:italic;color:#F5D0DC;font-size:16px;margin:12px 0;min-height:20px}
+
+/* ─── DAY 09: BIRTHDAY GIFT ─── */
+.sp-gift-wrap{position:relative;width:200px;height:200px;margin:20px auto;cursor:pointer}
+.sp-gift-box{position:absolute;inset:20px 0 0;background:linear-gradient(135deg,#C2476B,#9E2E51);border-radius:8px;display:flex;justify-content:center;align-items:center;transition:transform .6s}
+.sp-gift-box.opening{animation:giftShake .5s}
+@keyframes giftShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px) rotate(-2deg)}75%{transform:translateX(5px) rotate(2deg)}}
+.sp-gift-lid{position:absolute;top:0;left:-10%;right:-10%;height:50px;background:linear-gradient(135deg,#9E2E51,#7A1A35);border-radius:6px;transition:all 1s cubic-bezier(.4,.2,.3,1);z-index:2}
+.sp-gift-lid.open{transform:translateY(-100px) rotate(-15deg)}
+.sp-gift-ribbon-v{position:absolute;top:0;bottom:0;left:50%;width:18px;background:linear-gradient(180deg,#F5D0DC,#fff);transform:translateX(-50%);z-index:3;transition:all .6s}
+.sp-gift-ribbon-v.gone{opacity:0;transform:translateX(-50%) scaleY(0)}
+.sp-gift-bow{position:absolute;top:-15px;left:50%;transform:translateX(-50%);width:50px;height:30px;z-index:4;transition:all .6s}
+.sp-gift-bow.gone{opacity:0;transform:translateX(-50%) translateY(-30px) rotate(45deg)}
+.sp-gift-bow::before,.sp-gift-bow::after{content:"";position:absolute;top:0;width:25px;height:30px;background:radial-gradient(ellipse,#F5D0DC 40%,#C2476B 100%);border-radius:50% 50% 50% 0;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.sp-gift-bow::before{left:0;transform:rotate(-25deg)}
+.sp-gift-bow::after{right:0;transform:rotate(25deg) scaleX(-1)}
+.sp-gift-instruction{text-align:center;font-size:13px;color:rgba(255,255,255,.6);font-style:italic;margin:8px 0;min-height:20px}
+.sp-gift-content{display:none;text-align:left;background:rgba(184,149,90,.1);border:1px solid rgba(184,149,90,.3);border-radius:14px;padding:20px;margin-top:14px;animation:fadeInUp .6s ease}
+.sp-gift-content.on{display:block}
+.sp-gift-typed{font-family:'Playfair Display',serif;font-size:15px;line-height:1.7;color:#F5D0DC;font-style:italic}
+.sp-gift-confetti{position:absolute;width:8px;height:8px;animation:spConfettiFall 4s linear forwards}
+@keyframes spConfettiFall{0%{transform:translateY(-20px) rotate(0);opacity:1}100%{transform:translateY(400px) rotate(720deg);opacity:0}}
+
+/* ─── DAY 10: CONNECT THE DOTS ─── */
+.sp-dots-canvas{width:100%;max-width:340px;height:340px;margin:14px auto;display:block;background:rgba(255,255,255,.02);border-radius:14px;cursor:crosshair;border:1px solid rgba(255,255,255,.08)}
+.sp-dots-status{font-size:13px;color:rgba(255,255,255,.7);text-align:center;margin:8px 0;min-height:20px}
+
+/* ─── DAY 03: PROPHECY ─── */
+.sp-prophecy{background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:24px 20px;margin:16px 0;font-family:'Playfair Display',serif;font-style:italic;font-size:17px;line-height:2;color:#fff;text-align:center;letter-spacing:.01em}
+.sp-prophecy-blank{display:inline-block;min-width:80px;height:24px;background:linear-gradient(90deg,rgba(194,71,107,.2),rgba(194,71,107,.4),rgba(194,71,107,.2));border-radius:6px;cursor:pointer;vertical-align:middle;margin:0 2px;transition:all .25s;animation:prophecyShimmer 2s infinite;border:1px dashed rgba(255,255,255,.2);font-size:14px;color:rgba(255,255,255,.5);font-style:normal;letter-spacing:.1em;padding:0 8px}
+.sp-prophecy-blank:hover{transform:scale(1.06);background:rgba(194,71,107,.5)}
+.sp-prophecy-blank.solved{background:rgba(184,149,90,.25);border:1px solid #B8955A;color:#F5D0DC;font-style:italic;font-family:'Playfair Display',serif;cursor:default;animation:none;font-size:17px;min-width:auto}
+.sp-prophecy-blank.shake{animation:shake .4s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+@keyframes prophecyShimmer{0%,100%{box-shadow:0 0 0 0 rgba(194,71,107,.2)}50%{box-shadow:0 0 0 4px rgba(194,71,107,.05)}}
+.sp-prophecy-picker{position:absolute;background:#1A1118;border:1px solid rgba(194,71,107,.4);border-radius:12px;padding:8px;z-index:200;box-shadow:0 16px 50px rgba(0,0,0,.5);display:none;min-width:200px}
+.sp-prophecy-picker.on{display:block;animation:fadeInUp .25s ease}
+.sp-prophecy-opt{display:block;width:100%;text-align:left;padding:8px 14px;background:transparent;color:#fff;border:none;border-radius:6px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-style:normal;margin-bottom:2px;transition:all .15s}
+.sp-prophecy-opt:hover{background:rgba(194,71,107,.2)}
+.sp-prophecy-status{text-align:center;font-size:12px;color:rgba(255,255,255,.5);margin-top:8px;min-height:18px;font-style:italic}
+.sp-prophecy-final{text-align:center;font-family:'Playfair Display',serif;color:#F5D0DC;font-style:italic;margin-top:14px;display:none;animation:fadeInUp .5s ease;font-size:14px;line-height:1.6}
+.sp-prophecy-final.on{display:block}
+
+/* ─── DAY 07: FLASHLIGHT ─── */
+.sp-flash-stage{position:relative;width:100%;max-width:380px;height:300px;margin:14px auto;background:#000;border-radius:14px;overflow:hidden;cursor:none;border:1px solid rgba(255,255,255,.08)}
+.sp-flash-stage::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),transparent 0,transparent 60px,rgba(0,0,0,.85) 110px,#000 140px);pointer-events:none;z-index:2;transition:background .05s}
+.sp-flash-stage.touch::before{background:radial-gradient(circle at var(--mx,50%) var(--my,50%),transparent 0,transparent 75px,rgba(0,0,0,.85) 125px,#000 155px)}
+.sp-flash-item{position:absolute;font-size:24px;line-height:1;transform:translate(-50%,-50%);transition:opacity .3s;z-index:1;pointer-events:none}
+.sp-flash-item.found{opacity:.6;filter:drop-shadow(0 0 8px rgba(194,71,107,.6))}
+.sp-flash-label{position:absolute;font-size:10px;letter-spacing:.05em;color:#F5D0DC;font-family:'DM Sans',sans-serif;font-weight:500;text-align:center;transform:translate(-50%,12px);white-space:nowrap;opacity:0;transition:opacity .3s;z-index:1;pointer-events:none}
+.sp-flash-item.found ~ .sp-flash-label,.sp-flash-label.show{opacity:1}
+.sp-flash-counter{text-align:center;font-size:13px;color:rgba(255,255,255,.7);margin:8px 0;min-height:20px}
+.sp-flash-hint{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:rgba(255,255,255,.4);font-size:12px;font-style:italic;text-align:center;pointer-events:none;z-index:0}
+.sp-flash-stage.started .sp-flash-hint{display:none}
+.sp-flash-revealed{position:absolute;inset:0;background:linear-gradient(135deg,#1A1118,#2D1020);display:none;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:24px;z-index:5;animation:fadeInUp .6s ease}
+.sp-flash-revealed.on{display:flex}
+.sp-flash-revealed-title{font-family:'Playfair Display',serif;font-style:italic;color:#F5D0DC;font-size:18px;line-height:1.5}
+.sp-flash-revealed-sub{font-size:12px;color:rgba(255,255,255,.5);margin-top:10px}
+
+@media(max-width:500px){
+  .sp-grid{grid-template-columns:1fr}
+  .sp-modal-card{padding:28px 20px}
+  .sp-mem-grid{max-width:260px}
+  .sp-mem-card{font-size:20px}
+  .sp-wordle-board{max-width:240px}
+  .sp-wordle-cell{font-size:18px}
+  .sp-wordle-key{font-size:11px;padding:6px 0}
+  .sp-candles{gap:5px}
+  .sp-candle{width:6px;height:42px}
+}
 /* ADM button */
 .sp-adm-wrap{position:fixed;bottom:18px;right:18px;z-index:100001;opacity:.4;transition:opacity .2s}
 .sp-adm-wrap:hover{opacity:1}
@@ -674,8 +832,6 @@ body.dark .mood-inner{background:#1A1118}
 .sp-music-btn{position:fixed;top:16px;right:16px;z-index:100002;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.5);font-size:14px;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center}
 .sp-music-btn:hover{background:rgba(255,255,255,.12);color:#fff}
 .sp-music-btn.playing{color:#C2476B;border-color:rgba(194,71,107,.4)}
-
-@media(max-width:500px){.sp-grid{grid-template-columns:1fr}.sp-modal-card{padding:28px 20px}}
 </style>
 
 <!-- SPOILER WALL -->
@@ -747,54 +903,94 @@ body.dark .mood-inner{background:#1A1118}
       content: null
     },
     {
+      date: '2026-06-01', // 01/06
+      icon: '🎴',
+      label: '01 · jun',
+      status: '1 de junho',
+      title: 'Jogo da memória',
+      type: 'memory',
+      content: null
+    },
+    {
+      date: '2026-06-02', // 02/06
+      icon: '🪙',
+      label: '02 · jun',
+      status: '2 de junho',
+      title: 'Cara ou coroa?',
+      type: 'coin',
+      content: null
+    },
+    {
       date: '2026-06-03', // 03/06
-      icon: '💬',
+      icon: '🔮',
       label: '03 · jun',
       status: '3 de junho',
-      title: 'Uma frase nossa',
-      content: `
-        <p class="sp-modal-eyebrow">3 de junho · 18h</p>
-        <div class="sp-modal-icon">💬</div>
-        <h2 class="sp-modal-title">Você reconhece isso?</h2>
-        <p class="sp-modal-text">Alguém disse isso uma vez, numa madrugada especial. E mudou tudo.</p>
-        <div style="background:rgba(194,71,107,.1);border-left:3px solid #C2476B;border-radius:10px;padding:14px 18px;margin:16px 0;font-family:'Playfair Display',serif;font-style:italic;font-size:18px;color:#F5D0DC;">"OO MDS Q COISA MAI LINDA DA GIGI"</div>
-        <p class="sp-modal-text" style="font-size:13px;opacity:.7">Em 9 dias você vai saber o que isso tem a ver com a surpresa.</p>
-      `
+      title: 'Uma profecia em fragmentos',
+      type: 'prophecy',
+      content: null
+    },
+    {
+      date: '2026-06-04', // 04/06
+      icon: '🔤',
+      label: '04 · jun',
+      status: '4 de junho',
+      title: 'Termo do casal',
+      type: 'wordle',
+      content: null
+    },
+    {
+      date: '2026-06-05', // 05/06
+      icon: '🎚️',
+      label: '05 · jun',
+      status: '5 de junho',
+      title: 'Quanto você acha?',
+      type: 'sliders',
+      content: null
     },
     {
       date: '2026-06-06', // 06/06
-      icon: '📅',
+      icon: '👀',
       label: '06 · jun',
       status: '6 de junho',
-      title: 'Aviso de aniversário',
-      content: `
-        <p class="sp-modal-eyebrow">6 de junho · 18h</p>
-        <div class="sp-modal-icon">🎂</div>
-        <h2 class="sp-modal-title">Faltam 3 dias.</h2>
-        <p class="sp-modal-text">Pro seu aniversário, neném.<br><br>Eu já sei o que vou te dar. Você ainda não.<br>Posso adiantar uma coisa: não cabe numa caixa.</p>
-      `
+      title: 'Quem disse o quê',
+      type: 'whosaid',
+      content: null
     },
     {
       date: '2026-06-07', // 07/06
-      icon: '🧩',
+      icon: '🔦',
       label: '07 · jun',
       status: '7 de junho',
-      title: 'Um puzzle de pistas',
-      type: 'puzzle',
+      title: 'O que tem no escuro',
+      type: 'flashlight',
+      content: null
+    },
+    {
+      date: '2026-06-08', // 08/06
+      icon: '🕯️',
+      label: '08 · jun',
+      status: '8 de junho',
+      title: 'Acende as velinhas',
+      type: 'candles',
+      content: null
+    },
+    {
+      date: '2026-06-09', // 09/06
+      icon: '🎁',
+      label: '09 · jun',
+      status: '9 de junho · ANIVERSÁRIO',
+      title: 'Abre seu presente 🎂',
+      type: 'gift',
       content: null
     },
     {
       date: '2026-06-10', // 10/06
-      icon: '🎉',
+      icon: '✏️',
       label: '10 · jun',
       status: '10 de junho',
-      title: 'Pós-aniversário',
-      content: `
-        <p class="sp-modal-eyebrow">10 de junho · 18h</p>
-        <div class="sp-modal-icon">🎉</div>
-        <h2 class="sp-modal-title">Espero que ontem foi lindo.</h2>
-        <p class="sp-modal-text">Feliz aniversário (atrasado) meu amor. Mas sua surpresa real ainda tá vindo.<br><br>Lembra que o primeiro "te amo" saiu numa madrugada de aniversário? Exatamente esse tipo de coisa vai estar esperando por você dia 12.</p>
-      `
+      title: 'Conecte os pontos',
+      type: 'dots',
+      content: null
     },
     {
       date: '2026-06-11', // 11/06
@@ -910,6 +1106,32 @@ body.dark .mood-inner{background:#1A1118}
       card.innerHTML = buildPuzzleHTML(nextCd, nextLabel);
     } else if(s.type === 'blurred'){
       card.innerHTML = buildBlurredHTML(nextCd, nextLabel);
+    } else if(s.type === 'memory'){
+      card.innerHTML = buildMemoryHTML(nextCd, nextLabel);
+      setTimeout(initMemoryGame, 50);
+    } else if(s.type === 'coin'){
+      card.innerHTML = buildCoinHTML(nextCd, nextLabel);
+    } else if(s.type === 'wordle'){
+      card.innerHTML = buildWordleHTML(nextCd, nextLabel);
+      setTimeout(initWordle, 50);
+    } else if(s.type === 'sliders'){
+      card.innerHTML = buildSlidersHTML(nextCd, nextLabel);
+    } else if(s.type === 'whosaid'){
+      card.innerHTML = buildWhoSaidHTML(nextCd, nextLabel);
+      setTimeout(initWhoSaid, 50);
+    } else if(s.type === 'candles'){
+      card.innerHTML = buildCandlesHTML(nextCd, nextLabel);
+    } else if(s.type === 'gift'){
+      card.innerHTML = buildGiftHTML(nextCd, nextLabel);
+    } else if(s.type === 'dots'){
+      card.innerHTML = buildDotsHTML(nextCd, nextLabel);
+      setTimeout(initDots, 50);
+    } else if(s.type === 'prophecy'){
+      card.innerHTML = buildProphecyHTML(nextCd, nextLabel);
+      setTimeout(initProphecy, 50);
+    } else if(s.type === 'flashlight'){
+      card.innerHTML = buildFlashlightHTML(nextCd, nextLabel);
+      setTimeout(initFlashlight, 50);
     } else {
       card.innerHTML = (s.content||'') + (nextCd ? `<p class="sp-modal-next">próxima pista: ${nextLabel} (${nextCd})</p>` : `<p class="sp-modal-next">próxima: dia ${nextLabel} ✨</p>`) + `<button class="sp-modal-close" onclick="closeSpoilerModal()">Fechar ❤️</button>`;
     }
@@ -1012,6 +1234,922 @@ body.dark .mood-inner{background:#1A1118}
       val.textContent = val.dataset.real;
     }
   };
+
+  // ═══════════════════════════════════════════
+  // ─── DAY 01: MEMORY GAME ───
+  // ═══════════════════════════════════════════
+  function buildMemoryHTML(nextCd, nextLabel){
+    return `
+      <p class="sp-modal-eyebrow">1 de junho · 18h</p>
+      <div class="sp-modal-icon">🎴</div>
+      <h2 class="sp-modal-title">Jogo da memória.</h2>
+      <p class="sp-modal-text">Encontre todos os 6 pares. Cada par é uma coisa nossa.</p>
+      <div class="sp-mem-grid" id="sp-mem-grid"></div>
+      <p class="sp-mem-status" id="sp-mem-status">0 / 6 pares encontrados</p>
+      <p style="font-size:11px;color:rgba(255,255,255,.4);text-align:center;margin-bottom:10px">tente em ${nextCd ? '' : ''}menos de 20 tentativas 😏</p>
+      ${nextCd ? `<p class="sp-modal-next">próxima pista: ${nextLabel} (${nextCd})</p>` : `<p class="sp-modal-next">próxima: dia ${nextLabel} ✨</p>`}
+      <button class="sp-modal-close" onclick="closeSpoilerModal()">Fechar ❤️</button>
+    `;
+  }
+
+  let memState = null;
+  function initMemoryGame(){
+    const PAIRS = [
+      { id: 1, emoji: '❤️', label: 'amor' },
+      { id: 2, emoji: '🌙', label: 'noite' },
+      { id: 3, emoji: '🐮', label: 'mooo' },
+      { id: 4, emoji: '👶', label: 'neném' },
+      { id: 5, emoji: '🌹', label: 'rosa' },
+      { id: 6, emoji: '💬', label: 'chat' },
+    ];
+    let cards = [];
+    PAIRS.forEach(p => { cards.push({...p, uid: p.id+'a'}); cards.push({...p, uid: p.id+'b'}); });
+    // shuffle
+    for(let i = cards.length-1; i > 0; i--){
+      const j = Math.floor(Math.random()*(i+1));
+      [cards[i], cards[j]] = [cards[j], cards[i]];
+    }
+    memState = { cards, flipped: [], matched: new Set(), tries: 0, busy: false };
+    const grid = document.getElementById('sp-mem-grid');
+    grid.innerHTML = cards.map((c, i) => 
+      `<button class="sp-mem-card" data-i="${i}" onclick="window.flipMemCard(${i})">
+        <span class="face-back">?</span>
+        <span class="face-front">${c.emoji}</span>
+      </button>`
+    ).join('');
+  }
+  
+  window.flipMemCard = function(i){
+    if(!memState || memState.busy) return;
+    if(memState.matched.has(memState.cards[i].id)) return;
+    if(memState.flipped.includes(i)) return;
+    
+    const el = document.querySelector(`.sp-mem-card[data-i="${i}"]`);
+    el.classList.add('flipped');
+    memState.flipped.push(i);
+    
+    if(memState.flipped.length === 2){
+      memState.busy = true;
+      memState.tries++;
+      const [a, b] = memState.flipped;
+      if(memState.cards[a].id === memState.cards[b].id){
+        // Match!
+        setTimeout(() => {
+          document.querySelector(`.sp-mem-card[data-i="${a}"]`).classList.add('matched');
+          document.querySelector(`.sp-mem-card[data-i="${b}"]`).classList.add('matched');
+          memState.matched.add(memState.cards[a].id);
+          memState.flipped = [];
+          memState.busy = false;
+          document.getElementById('sp-mem-status').textContent = `${memState.matched.size} / 6 pares encontrados`;
+          if(memState.matched.size === 6){
+            setTimeout(() => {
+              document.getElementById('sp-mem-status').innerHTML = `<span style="color:#F5D0DC;font-family:'Playfair Display',serif;font-style:italic;font-size:16px">Você conseguiu em ${memState.tries} tentativas! 🌹<br><span style="font-size:13px;font-style:normal;color:rgba(255,255,255,.6)">6 pares. 6 coisas que mais aparecem entre nós. Não é coincidência.</span></span>`;
+              if(navigator.vibrate) navigator.vibrate([60, 30, 60, 30, 100]);
+            }, 400);
+          }
+        }, 400);
+      } else {
+        setTimeout(() => {
+          document.querySelector(`.sp-mem-card[data-i="${a}"]`).classList.remove('flipped');
+          document.querySelector(`.sp-mem-card[data-i="${b}"]`).classList.remove('flipped');
+          memState.flipped = [];
+          memState.busy = false;
+        }, 900);
+      }
+    }
+  };
+
+  // ═══════════════════════════════════════════
+  // ─── DAY 02: COIN FLIP ───
+  // ═══════════════════════════════════════════
+  function buildCoinHTML(nextCd, nextLabel){
+    return `
+      <p class="sp-modal-eyebrow">2 de junho · 18h</p>
+      <div class="sp-modal-icon">🪙</div>
+      <h2 class="sp-modal-title">Cara ou coroa?</h2>
+      <p class="sp-modal-text">Vou te fazer uma pergunta. Joga a moeda — se der cara, te dou uma dica de verdade. Se der coroa, fica curiosa mais um dia 😏</p>
+      <div class="sp-coin"><div class="sp-coin-inner" id="sp-coin-inner">
+        <div class="sp-coin-face heads">★</div>
+        <div class="sp-coin-face tails">♛</div>
+      </div></div>
+      <button class="sp-coin-btn" id="sp-coin-btn" onclick="window.flipCoin()">🪙 Jogar moeda</button>
+      <div class="sp-coin-result" id="sp-coin-result"></div>
+      ${nextCd ? `<p class="sp-modal-next">próxima pista: ${nextLabel} (${nextCd})</p>` : `<p class="sp-modal-next">próxima: dia ${nextLabel} ✨</p>`}
+      <button class="sp-modal-close" onclick="closeSpoilerModal()">Fechar ❤️</button>
+    `;
+  }
+  
+  let coinFlipsToday = 0;
+  window.flipCoin = function(){
+    const inner = document.getElementById('sp-coin-inner');
+    const btn = document.getElementById('sp-coin-btn');
+    const result = document.getElementById('sp-coin-result');
+    if(!inner || btn.disabled) return;
+    
+    btn.disabled = true;
+    coinFlipsToday++;
+    result.classList.remove('on');
+    
+    const isHeads = Math.random() < 0.5;
+    const rotations = 4 + Math.floor(Math.random() * 3);
+    const finalRot = isHeads ? rotations * 360 : rotations * 360 + 180;
+    inner.classList.add('flipping');
+    inner.style.transform = `rotateY(${finalRot}deg)`;
+    
+    if(navigator.vibrate) navigator.vibrate([20, 10, 20, 10, 30]);
+    
+    setTimeout(() => {
+      if(isHeads){
+        const hints = [
+          { text: 'CARA! 🎉 A palavra-chave começa com a letra:', reveal: 'N' },
+          { text: 'CARA de novo! Tem outra letra:', reveal: 'É' },
+          { text: 'Mais uma cara! Vai:', reveal: 'M' },
+        ];
+        const i = Math.min(coinFlipsToday - 1, hints.length - 1);
+        result.innerHTML = `${hints[i].text}<span class="reveal">${hints[i].reveal}</span><p style="font-size:12px;color:rgba(255,255,255,.5);margin-top:8px">você consegue juntar?</p>`;
+      } else {
+        const msgs = [
+          'COROA! 😏 Sem dica hoje. Tenta de novo?',
+          'COROA de novo! A sorte tá contra você hoje.',
+          'COROA pela terceira vez! Que azar 😂 mas perto, perto...',
+        ];
+        const i = Math.min(coinFlipsToday - 1, msgs.length - 1);
+        result.innerHTML = msgs[i];
+      }
+      result.classList.add('on');
+      if(coinFlipsToday < 5){
+        btn.disabled = false;
+        btn.textContent = `🪙 Jogar de novo (${coinFlipsToday}/5)`;
+      } else {
+        btn.textContent = 'Acabou! Volta amanhã 🌙';
+      }
+    }, 2100);
+  };
+
+  // ═══════════════════════════════════════════
+  // ─── DAY 04: TERMO / WORDLE ───
+  // ═══════════════════════════════════════════
+  function buildWordleHTML(nextCd, nextLabel){
+    return `
+      <p class="sp-modal-eyebrow">4 de junho · 18h</p>
+      <div class="sp-modal-icon">🔤</div>
+      <h2 class="sp-modal-title">Termo do casal.</h2>
+      <p class="sp-modal-text">5 letras. 6 tentativas. É uma palavra que importa muito pra gente.</p>
+      <div class="sp-wordle-board" id="sp-wordle-board"></div>
+      <p class="sp-wordle-hint" id="sp-wordle-hint">tenta uma palavra qualquer pra começar...</p>
+      <div class="sp-wordle-kb" id="sp-wordle-kb"></div>
+      ${nextCd ? `<p class="sp-modal-next">próxima pista: ${nextLabel} (${nextCd})</p>` : `<p class="sp-modal-next">próxima: dia ${nextLabel} ✨</p>`}
+      <button class="sp-modal-close" onclick="closeSpoilerModal()">Fechar ❤️</button>
+    `;
+  }
+  
+  let wordleState = null;
+  const WORDLE_ANSWER = 'LINDA';
+  function initWordle(){
+    wordleState = { rows: [], current: '', currentRow: 0, done: false, kbStatus: {} };
+    const board = document.getElementById('sp-wordle-board');
+    let html = '';
+    for(let r = 0; r < 6; r++){
+      html += `<div class="sp-wordle-row" data-row="${r}">`;
+      for(let c = 0; c < 5; c++){
+        html += `<div class="sp-wordle-cell" data-row="${r}" data-col="${c}"></div>`;
+      }
+      html += '</div>';
+    }
+    board.innerHTML = html;
+    
+    const kb = document.getElementById('sp-wordle-kb');
+    const rows = [
+      ['Q','W','E','R','T','Y','U','I','O','P'],
+      ['A','S','D','F','G','H','J','K','L'],
+      ['ENVIAR','Z','X','C','V','B','N','M','⌫']
+    ];
+    kb.innerHTML = rows.map(row => 
+      `<div class="sp-wordle-kb-row">${row.map(k => 
+        `<button class="sp-wordle-key ${k.length>1?'wide':''}" data-k="${k}" onclick="window.wordleKey('${k}')">${k}</button>`
+      ).join('')}</div>`
+    ).join('');
+  }
+  
+  window.wordleKey = function(k){
+    if(!wordleState || wordleState.done) return;
+    if(k === 'ENVIAR'){
+      if(wordleState.current.length !== 5){
+        const hint = document.getElementById('sp-wordle-hint');
+        hint.textContent = 'precisa de 5 letras...';
+        return;
+      }
+      submitWordleGuess();
+    } else if(k === '⌫'){
+      if(wordleState.current.length > 0){
+        wordleState.current = wordleState.current.slice(0, -1);
+        renderWordleCurrent();
+      }
+    } else if(/^[A-ZÇ]$/.test(k) && wordleState.current.length < 5){
+      wordleState.current += k;
+      renderWordleCurrent();
+    }
+  };
+  
+  function renderWordleCurrent(){
+    const r = wordleState.currentRow;
+    for(let c = 0; c < 5; c++){
+      const cell = document.querySelector(`.sp-wordle-cell[data-row="${r}"][data-col="${c}"]`);
+      const ch = wordleState.current[c] || '';
+      cell.textContent = ch;
+      cell.classList.toggle('filled', !!ch);
+    }
+  }
+  
+  function submitWordleGuess(){
+    const guess = wordleState.current;
+    const r = wordleState.currentRow;
+    const answer = WORDLE_ANSWER;
+    const states = ['absent','absent','absent','absent','absent'];
+    const used = [false,false,false,false,false];
+    // Mark correct
+    for(let i = 0; i < 5; i++){
+      if(guess[i] === answer[i]){ states[i] = 'correct'; used[i] = true; }
+    }
+    // Mark present
+    for(let i = 0; i < 5; i++){
+      if(states[i] === 'correct') continue;
+      for(let j = 0; j < 5; j++){
+        if(!used[j] && guess[i] === answer[j]){ states[i] = 'present'; used[j] = true; break; }
+      }
+    }
+    // Apply with delay for animation
+    for(let i = 0; i < 5; i++){
+      setTimeout(() => {
+        const cell = document.querySelector(`.sp-wordle-cell[data-row="${r}"][data-col="${i}"]`);
+        cell.classList.add(states[i]);
+        // Update kb
+        const key = document.querySelector(`.sp-wordle-key[data-k="${guess[i]}"]`);
+        if(key){
+          const cur = wordleState.kbStatus[guess[i]];
+          const newS = states[i];
+          const priority = {'correct':3,'present':2,'absent':1};
+          if(!cur || priority[newS] > priority[cur]){
+            wordleState.kbStatus[guess[i]] = newS;
+            key.classList.remove('correct','present','absent');
+            key.classList.add(newS);
+          }
+        }
+      }, i * 200);
+    }
+    
+    const hint = document.getElementById('sp-wordle-hint');
+    setTimeout(() => {
+      if(guess === answer){
+        wordleState.done = true;
+        hint.innerHTML = `<strong style="color:#F5D0DC;font-family:'Playfair Display',serif;font-style:italic;font-size:16px">Acertou! 🌹 "${answer}" — palavra que apareceu <strong>5.544 vezes</strong> entre nós.</strong>`;
+        if(navigator.vibrate) navigator.vibrate([80, 40, 80, 40, 120]);
+      } else if(wordleState.currentRow >= 5){
+        wordleState.done = true;
+        hint.innerHTML = `Acabaram as tentativas! A palavra era <strong style="color:#F5D0DC">${answer}</strong> — você vai entender por quê dia 12 💗`;
+      } else {
+        wordleState.currentRow++;
+        wordleState.current = '';
+        // hints
+        if(wordleState.currentRow === 3) hint.textContent = 'dica: é uma palavra que aparece MUITO entre nós ❤️';
+        else if(wordleState.currentRow === 4) hint.textContent = 'dica: começa com L 👀';
+        else if(wordleState.currentRow === 5) hint.textContent = 'dica: termina com A — última chance!';
+        else hint.textContent = 'continua tentando...';
+      }
+    }, 1100);
+  }
+
+  // ═══════════════════════════════════════════
+  // ─── DAY 05: SLIDERS GUESS ───
+  // ═══════════════════════════════════════════
+  const SLIDER_QS = [
+    { q: 'Quantas mensagens você acha que a gente trocou?', target: 281091, max: 500000, lbl: 'msgs', step: 1000 },
+    { q: 'Quantas vezes eu te chamei de "linda"?', target: 5544, max: 15000, lbl: 'vezes', step: 100 },
+    { q: 'Quantas vezes você me chamou de "neném"?', target: 5555, max: 15000, lbl: 'vezes', step: 100 },
+    { q: 'Quantas risadas (kkk) a gente deu?', target: 20867, max: 50000, lbl: 'kkk', step: 500 },
+    { q: 'Qual o maior número de dias seguidos que a gente conversou?', target: 444, max: 1000, lbl: 'dias', step: 10 },
+  ];
+  
+  function buildSlidersHTML(nextCd, nextLabel){
+    return `
+      <p class="sp-modal-eyebrow">5 de junho · 18h</p>
+      <div class="sp-modal-icon">🎚️</div>
+      <h2 class="sp-modal-title">Adivinha esses números.</h2>
+      <p class="sp-modal-text">5 perguntas. Arrasta o slider — eu te digo se tá quente, frio, longe ou perto. Sem dizer o número 😏</p>
+      <div id="sp-sliders-list">
+        ${SLIDER_QS.map((q, i) => `
+          <div class="sp-slider-q">
+            <p class="sp-slider-q-text">${i+1}. ${q.q}</p>
+            <input type="range" class="sp-slider-range" min="0" max="${q.max}" step="${q.step}" value="0" data-i="${i}" oninput="window.spSliderUpdate(${i}, this.value)">
+            <p class="sp-slider-val" id="sp-slider-val-${i}">0 ${q.lbl}</p>
+            <p class="sp-slider-feedback" id="sp-slider-fb-${i}">arrasta pra adivinhar...</p>
+          </div>
+        `).join('')}
+      </div>
+      <p style="text-align:center;font-size:13px;color:#F5D0DC;font-style:italic;margin:14px 0">Os números reais? Você vê dia 12. ✨</p>
+      ${nextCd ? `<p class="sp-modal-next">próxima pista: ${nextLabel} (${nextCd})</p>` : `<p class="sp-modal-next">próxima: dia ${nextLabel} ✨</p>`}
+      <button class="sp-modal-close" onclick="closeSpoilerModal()">Fechar ❤️</button>
+    `;
+  }
+  
+  window.spSliderUpdate = function(i, v){
+    v = parseInt(v);
+    const q = SLIDER_QS[i];
+    document.getElementById(`sp-slider-val-${i}`).textContent = v.toLocaleString('pt-BR') + ' ' + q.lbl;
+    const fb = document.getElementById(`sp-slider-fb-${i}`);
+    const diff = Math.abs(v - q.target);
+    const ratio = diff / q.target;
+    fb.classList.remove('hot', 'warm');
+    if(v === 0){ fb.textContent = 'arrasta pra adivinhar...'; return; }
+    if(ratio < 0.02){ fb.textContent = '🔥 QUEIMANDO! Quase exato!'; fb.classList.add('hot'); }
+    else if(ratio < 0.1){ fb.textContent = '🔥 Quente! Muito perto!'; fb.classList.add('hot'); }
+    else if(ratio < 0.3){ fb.textContent = '☀️ Morno...'; fb.classList.add('warm'); }
+    else if(ratio < 0.6){ fb.textContent = v < q.target ? '🌤️ Frio... pensa maior' : '🌤️ Frio... pensa menor'; }
+    else { fb.textContent = v < q.target ? '🥶 Gelado! Muito maior!' : '🥶 Gelado! Muito menor!'; }
+  };
+
+  // ═══════════════════════════════════════════
+  // ─── DAY 06: WHO SAID IT ───
+  // ═══════════════════════════════════════════
+  const WHO_PHRASES = [
+    { id: 1, text: 'OO MDS Q COISA MAI LINDA DA GIGI', author: 'g' },
+    { id: 2, text: 'Te amoooo ❤️', author: 's' },
+    { id: 3, text: 'nenemmmmm vem aqui', author: 'g' },
+    { id: 4, text: 'Dengoooooo', author: 's' },
+    { id: 5, text: 'moooo vem aqui ja', author: 'g' },
+    { id: 6, text: 'Lindaaaaaa do meu coração', author: 's' },
+  ];
+  let whoSaidState = null;
+  
+  function buildWhoSaidHTML(nextCd, nextLabel){
+    return `
+      <p class="sp-modal-eyebrow">6 de junho · 18h</p>
+      <div class="sp-modal-icon">👀</div>
+      <h2 class="sp-modal-title">Quem disse o quê?</h2>
+      <p class="sp-modal-text">Arrasta cada frase pra coluna certa. Tudo isso a gente já disse — de verdade.</p>
+      <div id="sp-whosaid-phrases"></div>
+      <div class="sp-whosaid-zones">
+        <div class="sp-whosaid-zone s" data-zone="s" ondragover="event.preventDefault();this.classList.add('over')" ondragleave="this.classList.remove('over')" ondrop="window.whoSaidDrop(event,'s')">
+          <p class="sp-whosaid-zone-title">SÉRGIO</p>
+          <div id="sp-whosaid-drops-s"></div>
+        </div>
+        <div class="sp-whosaid-zone g" data-zone="g" ondragover="event.preventDefault();this.classList.add('over')" ondragleave="this.classList.remove('over')" ondrop="window.whoSaidDrop(event,'g')">
+          <p class="sp-whosaid-zone-title">GI</p>
+          <div id="sp-whosaid-drops-g"></div>
+        </div>
+      </div>
+      <p class="sp-whosaid-result" id="sp-whosaid-result"></p>
+      ${nextCd ? `<p class="sp-modal-next">próxima pista: ${nextLabel} (${nextCd})</p>` : `<p class="sp-modal-next">próxima: dia ${nextLabel} ✨</p>`}
+      <button class="sp-modal-close" onclick="closeSpoilerModal()">Fechar ❤️</button>
+    `;
+  }
+  
+  function initWhoSaid(){
+    whoSaidState = { remaining: [...WHO_PHRASES].sort(() => Math.random() - 0.5), placed: { s: [], g: [] }, correct: 0, total: WHO_PHRASES.length };
+    renderWhoSaid();
+  }
+  
+  function renderWhoSaid(){
+    const wrap = document.getElementById('sp-whosaid-phrases');
+    wrap.innerHTML = whoSaidState.remaining.map(p => 
+      `<div class="sp-whosaid-phrase" draggable="true" data-id="${p.id}" 
+        ondragstart="window.whoSaidDragStart(event,${p.id})" 
+        ondragend="this.classList.remove('dragging')"
+        onclick="window.whoSaidClickHint(${p.id})">"${p.text}"</div>`
+    ).join('');
+  }
+  
+  window.whoSaidDragStart = function(e, id){
+    e.dataTransfer.setData('text/plain', id);
+    e.target.classList.add('dragging');
+  };
+  
+  window.whoSaidDrop = function(e, zone){
+    e.preventDefault();
+    e.currentTarget.classList.remove('over');
+    const id = parseInt(e.dataTransfer.getData('text/plain'));
+    const phrase = WHO_PHRASES.find(p => p.id === id);
+    if(!phrase || !whoSaidState.remaining.find(p => p.id === id)) return;
+    
+    const correct = phrase.author === zone;
+    if(correct) whoSaidState.correct++;
+    whoSaidState.placed[zone].push({ ...phrase, correct });
+    whoSaidState.remaining = whoSaidState.remaining.filter(p => p.id !== id);
+    
+    const dropArea = document.getElementById('sp-whosaid-drops-' + zone);
+    dropArea.innerHTML += `<div class="sp-whosaid-drop ${correct ? 'right' : 'wrong'}"><span>"${phrase.text.slice(0,28)}${phrase.text.length>28?'...':''}"</span><span>${correct ? '✓' : '✗'}</span></div>`;
+    
+    renderWhoSaid();
+    if(navigator.vibrate) navigator.vibrate(correct ? 30 : [40, 20, 40]);
+    
+    if(whoSaidState.remaining.length === 0){
+      const result = document.getElementById('sp-whosaid-result');
+      if(whoSaidState.correct === whoSaidState.total){
+        result.innerHTML = '🌹 Você acertou TODAS! Conhece a gente bem demais. Todas essas frases são reais.';
+      } else {
+        result.innerHTML = `Acertou ${whoSaidState.correct}/${whoSaidState.total}. Quase! Mas todas as frases acima são reais. ❤️`;
+      }
+    }
+  };
+  
+  // Click-fallback for touch devices (mobile)
+  let whoSaidSelected = null;
+  window.whoSaidClickHint = function(id){
+    // Touch devices: highlight selected, then user taps the zone
+    const phrase = document.querySelector(`.sp-whosaid-phrase[data-id="${id}"]`);
+    if(!phrase) return;
+    document.querySelectorAll('.sp-whosaid-phrase').forEach(p => p.style.background = '');
+    if(whoSaidSelected === id){ whoSaidSelected = null; return; }
+    phrase.style.background = 'rgba(194,71,107,.25)';
+    whoSaidSelected = id;
+    // attach single-tap to zones
+    document.querySelectorAll('.sp-whosaid-zone').forEach(z => {
+      z.onclick = function(){
+        if(!whoSaidSelected) return;
+        const fakeEvent = {
+          preventDefault(){},
+          currentTarget: z,
+          dataTransfer: { getData(){ return whoSaidSelected; } }
+        };
+        window.whoSaidDrop(fakeEvent, z.dataset.zone);
+        whoSaidSelected = null;
+      };
+    });
+  };
+
+  // ═══════════════════════════════════════════
+  // ─── DAY 08: CANDLES ───
+  // ═══════════════════════════════════════════
+  function buildCandlesHTML(nextCd, nextLabel){
+    return `
+      <p class="sp-modal-eyebrow">8 de junho · 18h</p>
+      <div class="sp-modal-icon">🕯️</div>
+      <h2 class="sp-modal-title">Quase aniversário.</h2>
+      <p class="sp-modal-text">Amanhã você faz mais um ano. Toca em cada velinha pra acender — depois faz seu pedido.</p>
+      <div class="sp-candles-wrap">
+        <div class="sp-candles" id="sp-candles">
+          ${Array(9).fill(0).map((_, i) => `
+            <div class="sp-candle" data-i="${i}" onclick="window.lightCandle(${i})">
+              <div class="sp-flame"></div>
+            </div>
+          `).join('')}
+        </div>
+        <div class="sp-cake-base"></div>
+      </div>
+      <p class="sp-candles-counter" id="sp-candles-counter">0 / 9 velinhas acesas</p>
+      <input type="text" class="sp-wish-input" id="sp-wish-input" placeholder="faça seu pedido (em segredo, não conto pra ninguém)" maxlength="100" onkeydown="if(event.key==='Enter') window.makeWish()">
+      <p class="sp-wish-confirm" id="sp-wish-confirm"></p>
+      ${nextCd ? `<p class="sp-modal-next">próxima pista: ${nextLabel} (${nextCd})</p>` : `<p class="sp-modal-next">próxima: dia ${nextLabel} ✨</p>`}
+      <button class="sp-modal-close" onclick="closeSpoilerModal()">Fechar ❤️</button>
+    `;
+  }
+  
+  let candlesLit = 0;
+  window.lightCandle = function(i){
+    const candle = document.querySelector(`.sp-candle[data-i="${i}"]`);
+    if(!candle || candle.classList.contains('lit')) return;
+    candle.classList.add('lit');
+    candlesLit++;
+    document.getElementById('sp-candles-counter').textContent = `${candlesLit} / 9 velinhas acesas`;
+    if(navigator.vibrate) navigator.vibrate(20);
+    if(candlesLit === 9){
+      setTimeout(() => {
+        document.getElementById('sp-candles-counter').innerHTML = `<span style="color:#F5D0DC;font-style:italic;font-family:'Playfair Display',serif">Todas as 9 acesas. 🎂 Agora faz seu pedido:</span>`;
+        document.getElementById('sp-wish-input').classList.add('on');
+        document.getElementById('sp-wish-input').focus();
+      }, 300);
+    }
+  };
+  
+  window.makeWish = function(){
+    const input = document.getElementById('sp-wish-input');
+    const wish = input.value.trim();
+    if(!wish){ input.placeholder = 'tem que pedir alguma coisa!'; return; }
+    // animate blow out
+    document.querySelectorAll('.sp-candle.lit').forEach((c, i) => {
+      setTimeout(() => {
+        c.classList.remove('lit');
+      }, i * 80);
+    });
+    input.style.display = 'none';
+    document.getElementById('sp-wish-confirm').innerHTML = `Pedido feito ✨<br><span style="font-size:13px;color:rgba(255,255,255,.6);font-family:'DM Sans',sans-serif;font-style:normal">Eu não vou ler. Mas torço pra ele se realizar.<br>Boa noite, aniversariante quase oficial 🌙</span>`;
+    if(navigator.vibrate) navigator.vibrate([60, 30, 60, 30, 100]);
+  };
+
+  // ═══════════════════════════════════════════
+  // ─── DAY 09: BIRTHDAY GIFT (3 layers) ───
+  // ═══════════════════════════════════════════
+  function buildGiftHTML(nextCd, nextLabel){
+    return `
+      <p class="sp-modal-eyebrow">9 de junho · ANIVERSÁRIO 🎂</p>
+      <div class="sp-modal-icon">🎁</div>
+      <h2 class="sp-modal-title">Feliz aniversário, Gi.</h2>
+      <p class="sp-modal-text">Hoje tem presentinho. Vai abrindo aí 👇</p>
+      <div class="sp-gift-wrap" id="sp-gift-wrap">
+        <div class="sp-gift-box" id="sp-gift-box" onclick="window.openGiftLayer()">
+          <div class="sp-gift-lid" id="sp-gift-lid"></div>
+          <div class="sp-gift-ribbon-v" id="sp-gift-ribbon"></div>
+          <div class="sp-gift-bow" id="sp-gift-bow"></div>
+        </div>
+      </div>
+      <p class="sp-gift-instruction" id="sp-gift-instruction">clica pra começar a abrir 💝</p>
+      <div class="sp-gift-content" id="sp-gift-content"></div>
+      ${nextCd ? `<p class="sp-modal-next">próxima pista: ${nextLabel} (${nextCd})</p>` : `<p class="sp-modal-next">próxima: dia ${nextLabel} ✨</p>`}
+      <button class="sp-modal-close" onclick="closeSpoilerModal()">Fechar ❤️</button>
+    `;
+  }
+  
+  let giftLayer = 0;
+  window.openGiftLayer = function(){
+    giftLayer++;
+    const box = document.getElementById('sp-gift-box');
+    const inst = document.getElementById('sp-gift-instruction');
+    box.classList.add('opening');
+    if(navigator.vibrate) navigator.vibrate(40);
+    setTimeout(() => box.classList.remove('opening'), 500);
+    
+    if(giftLayer === 1){
+      document.getElementById('sp-gift-bow').classList.add('gone');
+      inst.textContent = 'tira o laço! mais um clique 🎀';
+    } else if(giftLayer === 2){
+      document.getElementById('sp-gift-ribbon').classList.add('gone');
+      inst.textContent = 'falta abrir a tampa! último clique 🎁';
+    } else if(giftLayer === 3){
+      document.getElementById('sp-gift-lid').classList.add('open');
+      inst.style.display = 'none';
+      // spawn confetti
+      const wrap = document.getElementById('sp-gift-wrap');
+      const colors = ['#C2476B','#F5D0DC','#B8955A','#fff'];
+      for(let i = 0; i < 40; i++){
+        const c = document.createElement('div');
+        c.className = 'sp-gift-confetti';
+        c.style.background = colors[Math.floor(Math.random()*colors.length)];
+        c.style.left = (40 + Math.random()*120) + 'px';
+        c.style.top = '40px';
+        c.style.animationDelay = (Math.random()*1) + 's';
+        c.style.width = (6+Math.random()*8)+'px';
+        c.style.height = c.style.width;
+        if(Math.random()>.5) c.style.borderRadius = '50%';
+        wrap.appendChild(c);
+        setTimeout(() => c.remove(), 4500);
+      }
+      // Type out message
+      setTimeout(() => {
+        const content = document.getElementById('sp-gift-content');
+        content.classList.add('on');
+        const msg = `Feliz aniversário, neném 🎂
+
+Hoje é seu dia.
+
+Seu presente real tá guardado pra dia 12. Mas posso adiantar: a surpresa vai te fazer olhar pra trás. Pra cada dia que a gente conversou. Pra cada palavra. Pra cada vez que eu te chamei de linda.
+
+Vai ser um abraço de 914 dias transformado em pixels.
+
+Te amo, hoje e sempre.
+
+— Sérgio`;
+        let i = 0;
+        content.innerHTML = '<div class="sp-gift-typed" id="sp-gift-typed"></div>';
+        const typed = document.getElementById('sp-gift-typed');
+        function typeChar(){
+          if(i < msg.length){
+            typed.innerHTML = msg.slice(0, i+1).replace(/\n/g, '<br>') + '<span style="opacity:.5">▎</span>';
+            i++;
+            setTimeout(typeChar, i < 80 ? 35 : 22);
+          } else {
+            typed.innerHTML = msg.replace(/\n/g, '<br>');
+          }
+        }
+        typeChar();
+        if(navigator.vibrate) navigator.vibrate([80, 40, 80, 40, 80, 40, 150]);
+      }, 700);
+    }
+  };
+
+  // ═══════════════════════════════════════════
+  // ─── DAY 10: CONNECT THE DOTS ───
+  // ═══════════════════════════════════════════
+  // 12 points that form a heart shape
+  const HEART_DOTS = [
+    {x: 170, y: 80},   // 1: top center notch
+    {x: 100, y: 50},   // 2: top left
+    {x: 50,  y: 90},   // 3: left
+    {x: 35,  y: 150},  // 4: outer left
+    {x: 60,  y: 210},  // 5: bottom left curve
+    {x: 110, y: 260},  // 6: bottom-left tail
+    {x: 170, y: 310},  // 7: bottom point
+    {x: 230, y: 260},  // 8: bottom-right tail
+    {x: 280, y: 210},  // 9: bottom right curve
+    {x: 305, y: 150},  // 10: outer right
+    {x: 290, y: 90},   // 11: right
+    {x: 240, y: 50},   // 12: top right
+  ];
+  let dotsConnected = 0;
+  
+  function buildDotsHTML(nextCd, nextLabel){
+    return `
+      <p class="sp-modal-eyebrow">10 de junho · 18h</p>
+      <div class="sp-modal-icon">✏️</div>
+      <h2 class="sp-modal-title">Conecte os pontos.</h2>
+      <p class="sp-modal-text">12 pontos. 12 dias é o dia D. Clica na ordem (1, 2, 3...) e veja o que aparece.</p>
+      <canvas class="sp-dots-canvas" id="sp-dots-canvas" width="340" height="340"></canvas>
+      <p class="sp-dots-status" id="sp-dots-status">clica no ponto 1 pra começar</p>
+      ${nextCd ? `<p class="sp-modal-next">próxima pista: ${nextLabel} (${nextCd})</p>` : `<p class="sp-modal-next">próxima: dia ${nextLabel} ✨</p>`}
+      <button class="sp-modal-close" onclick="closeSpoilerModal()">Fechar ❤️</button>
+    `;
+  }
+  
+  function initDots(){
+    dotsConnected = 0;
+    const canvas = document.getElementById('sp-dots-canvas');
+    if(!canvas) return;
+    const ctx = canvas.getContext('2d');
+    drawDots(ctx);
+    canvas.onclick = function(e){
+      const rect = canvas.getBoundingClientRect();
+      const x = (e.clientX - rect.left) * (canvas.width / rect.width);
+      const y = (e.clientY - rect.top) * (canvas.height / rect.height);
+      // check if clicked next dot
+      if(dotsConnected < HEART_DOTS.length){
+        const next = HEART_DOTS[dotsConnected];
+        const dx = x - next.x, dy = y - next.y;
+        if(Math.sqrt(dx*dx + dy*dy) < 22){
+          dotsConnected++;
+          drawDots(ctx);
+          if(navigator.vibrate) navigator.vibrate(25);
+          const status = document.getElementById('sp-dots-status');
+          if(dotsConnected === HEART_DOTS.length){
+            // close the heart
+            ctx.beginPath();
+            ctx.moveTo(HEART_DOTS[HEART_DOTS.length-1].x, HEART_DOTS[HEART_DOTS.length-1].y);
+            ctx.lineTo(HEART_DOTS[0].x, HEART_DOTS[0].y);
+            ctx.strokeStyle = '#C2476B';
+            ctx.lineWidth = 3;
+            ctx.stroke();
+            // fill heart
+            ctx.beginPath();
+            HEART_DOTS.forEach((p, i) => {
+              if(i === 0) ctx.moveTo(p.x, p.y);
+              else ctx.lineTo(p.x, p.y);
+            });
+            ctx.closePath();
+            ctx.fillStyle = 'rgba(194,71,107,.25)';
+            ctx.fill();
+            status.innerHTML = `<span style="color:#F5D0DC;font-family:'Playfair Display',serif;font-style:italic;font-size:16px">Você desenhou o que vem 💗<br><span style="font-size:13px;font-style:normal;color:rgba(255,255,255,.6)">12 pontos. Faltam 2 dias.</span></span>`;
+            if(navigator.vibrate) navigator.vibrate([60, 30, 60, 30, 120]);
+          } else {
+            status.textContent = `clica no ponto ${dotsConnected + 1}...`;
+          }
+        }
+      }
+    };
+  }
+  
+  function drawDots(ctx){
+    ctx.clearRect(0, 0, 340, 340);
+    // Draw lines between connected
+    if(dotsConnected > 1){
+      ctx.beginPath();
+      ctx.moveTo(HEART_DOTS[0].x, HEART_DOTS[0].y);
+      for(let i = 1; i < dotsConnected; i++){
+        ctx.lineTo(HEART_DOTS[i].x, HEART_DOTS[i].y);
+      }
+      ctx.strokeStyle = '#C2476B';
+      ctx.lineWidth = 3;
+      ctx.stroke();
+    }
+    // Draw dots
+    HEART_DOTS.forEach((p, i) => {
+      const isNext = i === dotsConnected;
+      const isConnected = i < dotsConnected;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, isNext ? 14 : 11, 0, Math.PI*2);
+      ctx.fillStyle = isConnected ? '#C2476B' : (isNext ? '#F5D0DC' : 'rgba(255,255,255,.25)');
+      ctx.fill();
+      if(isNext){
+        ctx.strokeStyle = '#fff';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+      }
+      // Number label
+      ctx.fillStyle = isConnected ? '#fff' : (isNext ? '#1A1118' : 'rgba(255,255,255,.7)');
+      ctx.font = '600 11px "DM Sans"';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(String(i+1), p.x, p.y);
+    });
+  }
+
+  // ═══════════════════════════════════════════
+  // ─── DAY 03: PROPHECY ───
+  // ═══════════════════════════════════════════
+  const PROPHECY_BLANKS = [
+    { 
+      id: 'mes', 
+      label: 'um mês',
+      opts: ['setembro', 'junho', 'outubro', 'janeiro'],
+      correct: 'junho'
+    },
+    {
+      id: 'hora',
+      label: 'uma hora',
+      opts: ['08h10', '23h45', '02h05', '18h30'],
+      correct: '02h05'
+    },
+    {
+      id: 'numero',
+      label: 'um número',
+      opts: ['50.000', '281.091', '1 milhão', '100.000'],
+      correct: '281.091'
+    },
+    {
+      id: 'final',
+      label: 'algo',
+      opts: ['um livro', 'um filme', 'uma surpresa', 'uma viagem'],
+      correct: 'uma surpresa'
+    },
+  ];
+  
+  let prophecyState = null;
+  
+  function buildProphecyHTML(nextCd, nextLabel){
+    return `
+      <p class="sp-modal-eyebrow">3 de junho · 18h</p>
+      <div class="sp-modal-icon">🔮</div>
+      <h2 class="sp-modal-title">A profecia em fragmentos.</h2>
+      <p class="sp-modal-text">Algumas palavras estão escondidas. Toca em cada espaço pra escolher o que cabe ali. Erre quantas vezes quiser — eu só conto se acertar.</p>
+      <div class="sp-prophecy" id="sp-prophecy">
+        Em <span class="sp-prophecy-blank" data-i="0">um mês</span>, às <span class="sp-prophecy-blank" data-i="1">uma hora</span>, aconteceu algo entre nós. 
+        Foram <span class="sp-prophecy-blank" data-i="2">um número</span> dessas coisas desde então. 
+        E tudo isso virou <span class="sp-prophecy-blank" data-i="3">algo</span>.
+      </div>
+      <p class="sp-prophecy-status" id="sp-prophecy-status">0 / 4 fragmentos revelados</p>
+      <p class="sp-prophecy-final" id="sp-prophecy-final"></p>
+      <div class="sp-prophecy-picker" id="sp-prophecy-picker"></div>
+      ${nextCd ? `<p class="sp-modal-next">próxima pista: ${nextLabel} (${nextCd})</p>` : `<p class="sp-modal-next">próxima: dia ${nextLabel} ✨</p>`}
+      <button class="sp-modal-close" onclick="closeSpoilerModal()">Fechar ❤️</button>
+    `;
+  }
+  
+  function initProphecy(){
+    prophecyState = { solved: new Set(), currentBlank: null };
+    document.querySelectorAll('.sp-prophecy-blank').forEach(el => {
+      el.onclick = function(e){
+        e.stopPropagation();
+        const i = parseInt(el.dataset.i);
+        if(prophecyState.solved.has(i)) return;
+        prophecyState.currentBlank = i;
+        const picker = document.getElementById('sp-prophecy-picker');
+        const blank = PROPHECY_BLANKS[i];
+        // shuffle opts
+        const opts = [...blank.opts].sort(() => Math.random() - 0.5);
+        picker.innerHTML = opts.map(o => 
+          `<button class="sp-prophecy-opt" data-v="${o}">${o}</button>`
+        ).join('');
+        picker.querySelectorAll('.sp-prophecy-opt').forEach(btn => {
+          btn.onclick = function(e){
+            e.stopPropagation();
+            tryProphecyAnswer(i, btn.dataset.v);
+          };
+        });
+        const rect = el.getBoundingClientRect();
+        const modalRect = document.getElementById('sp-modal-card').getBoundingClientRect();
+        picker.style.left = (rect.left - modalRect.left + rect.width/2 - 100) + 'px';
+        picker.style.top = (rect.bottom - modalRect.top + 8) + 'px';
+        picker.classList.add('on');
+      };
+    });
+    // Click outside picker to close
+    document.addEventListener('click', closeProphecyPicker);
+  }
+  
+  function closeProphecyPicker(){
+    const picker = document.getElementById('sp-prophecy-picker');
+    if(picker) picker.classList.remove('on');
+  }
+  
+  function tryProphecyAnswer(i, value){
+    const blank = PROPHECY_BLANKS[i];
+    const el = document.querySelector(`.sp-prophecy-blank[data-i="${i}"]`);
+    closeProphecyPicker();
+    if(value === blank.correct){
+      el.textContent = value;
+      el.classList.add('solved');
+      prophecyState.solved.add(i);
+      if(navigator.vibrate) navigator.vibrate(40);
+      const status = document.getElementById('sp-prophecy-status');
+      status.textContent = `${prophecyState.solved.size} / 4 fragmentos revelados`;
+      if(prophecyState.solved.size === 4){
+        setTimeout(() => {
+          status.style.display = 'none';
+          const final = document.getElementById('sp-prophecy-final');
+          final.innerHTML = `Você reconstruiu a profecia.<br><span style="color:rgba(255,255,255,.5);font-size:12px;font-style:normal">Mas o que ela significa, só dia 12. ✨</span>`;
+          final.classList.add('on');
+          if(navigator.vibrate) navigator.vibrate([60, 30, 80]);
+        }, 400);
+      }
+    } else {
+      el.classList.add('shake');
+      setTimeout(() => el.classList.remove('shake'), 400);
+      if(navigator.vibrate) navigator.vibrate([30, 20, 30]);
+    }
+  }
+
+  // ═══════════════════════════════════════════
+  // ─── DAY 07: FLASHLIGHT ───
+  // ═══════════════════════════════════════════
+  const FLASH_ITEMS = [
+    { emoji: '🌹', x: 15, y: 25, label: '5.544 vezes' },
+    { emoji: '🌙', x: 78, y: 18, label: '22h é o pico' },
+    { emoji: '❤️', x: 50, y: 50, label: 'mais que 3 mil' },
+    { emoji: '📅', x: 22, y: 75, label: '914 dias' },
+    { emoji: '⏰', x: 65, y: 72, label: '02h05 — uma vez' },
+    { emoji: '💬', x: 88, y: 50, label: 'centenas de milhares' },
+  ];
+  
+  let flashState = null;
+  
+  function buildFlashlightHTML(nextCd, nextLabel){
+    return `
+      <p class="sp-modal-eyebrow">7 de junho · 18h</p>
+      <div class="sp-modal-icon">🔦</div>
+      <h2 class="sp-modal-title">O que tem no escuro.</h2>
+      <p class="sp-modal-text">Tem 6 coisas escondidas aí dentro. Use o mouse (ou o dedo) como lanterna pra encontrar.</p>
+      <div class="sp-flash-stage" id="sp-flash-stage">
+        <p class="sp-flash-hint">passe o dedo pela tela →</p>
+        ${FLASH_ITEMS.map((item, i) => `
+          <span class="sp-flash-item" data-i="${i}" style="left:${item.x}%;top:${item.y}%">${item.emoji}</span>
+          <span class="sp-flash-label" data-i="${i}" style="left:${item.x}%;top:${item.y}%">${item.label}</span>
+        `).join('')}
+        <div class="sp-flash-revealed" id="sp-flash-revealed">
+          <p class="sp-flash-revealed-title">Você encontrou as 6 pistas.<br>Mas elas ainda não fazem sentido.</p>
+          <p class="sp-flash-revealed-sub">Dia 12 elas vão fazer.</p>
+        </div>
+      </div>
+      <p class="sp-flash-counter" id="sp-flash-counter">0 / 6 encontrados</p>
+      ${nextCd ? `<p class="sp-modal-next">próxima pista: ${nextLabel} (${nextCd})</p>` : `<p class="sp-modal-next">próxima: dia ${nextLabel} ✨</p>`}
+      <button class="sp-modal-close" onclick="closeSpoilerModal()">Fechar ❤️</button>
+    `;
+  }
+  
+  function initFlashlight(){
+    flashState = { found: new Set() };
+    const stage = document.getElementById('sp-flash-stage');
+    if(!stage) return;
+    
+    function checkProximity(mx, my){
+      const rect = stage.getBoundingClientRect();
+      const px = (mx - rect.left) / rect.width * 100;
+      const py = (my - rect.top) / rect.height * 100;
+      FLASH_ITEMS.forEach((item, i) => {
+        if(flashState.found.has(i)) return;
+        const dx = px - item.x;
+        const dy = py - item.y;
+        // proximity in % units roughly
+        const distPct = Math.sqrt(dx*dx + (dy*1.3)*(dy*1.3));
+        if(distPct < 15){
+          flashState.found.add(i);
+          const el = document.querySelector(`.sp-flash-item[data-i="${i}"]`);
+          const lbl = document.querySelector(`.sp-flash-label[data-i="${i}"]`);
+          if(el) el.classList.add('found');
+          if(lbl) lbl.classList.add('show');
+          if(navigator.vibrate) navigator.vibrate(30);
+          document.getElementById('sp-flash-counter').textContent = `${flashState.found.size} / 6 encontrados`;
+          if(flashState.found.size === 6){
+            setTimeout(() => {
+              document.getElementById('sp-flash-revealed').classList.add('on');
+              document.getElementById('sp-flash-counter').textContent = 'Todos encontrados ✨';
+              if(navigator.vibrate) navigator.vibrate([60, 30, 60, 30, 100]);
+            }, 600);
+          }
+        }
+      });
+    }
+    
+    stage.addEventListener('mousemove', e => {
+      stage.classList.add('started');
+      const rect = stage.getBoundingClientRect();
+      const mx = e.clientX - rect.left;
+      const my = e.clientY - rect.top;
+      stage.style.setProperty('--mx', mx + 'px');
+      stage.style.setProperty('--my', my + 'px');
+      checkProximity(e.clientX, e.clientY);
+    });
+    
+    stage.addEventListener('touchstart', e => {
+      stage.classList.add('started', 'touch');
+    });
+    stage.addEventListener('touchmove', e => {
+      e.preventDefault();
+      const touch = e.touches[0];
+      const rect = stage.getBoundingClientRect();
+      const mx = touch.clientX - rect.left;
+      const my = touch.clientY - rect.top;
+      stage.style.setProperty('--mx', mx + 'px');
+      stage.style.setProperty('--my', my + 'px');
+      checkProximity(touch.clientX, touch.clientY);
+    }, { passive: false });
+  }
 
   // ─── FINAL: LAUNCH MAIN SITE ───
   window.openFinal = function(){
