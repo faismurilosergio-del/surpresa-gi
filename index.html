@@ -1111,6 +1111,7 @@ body.dark .mood-inner{background:#1A1118}
       setTimeout(initMemoryGame, 50);
     } else if(s.type === 'coin'){
       card.innerHTML = buildCoinHTML(nextCd, nextLabel);
+      setTimeout(restoreCoinHistory, 50);
     } else if(s.type === 'wordle'){
       card.innerHTML = buildWordleHTML(nextCd, nextLabel);
       setTimeout(initWordle, 50);
@@ -1322,32 +1323,109 @@ body.dark .mood-inner{background:#1A1118}
   // ═══════════════════════════════════════════
   // ─── DAY 02: COIN FLIP ───
   // ═══════════════════════════════════════════
+  // Pool of mysterious hints (CARA wins) — vague clues about the surprise
+  const COIN_HEADS = [
+    'Aconteceu de madrugada. Em junho. Quase ninguém estava acordado.',
+    'Em um único dia, mais de mil. Foi entre Natal e Réveillon.',
+    '444 dias. Sem pular um. Você lembra disso?',
+    '5 letras. Aparecem mais de 5 mil vezes. Mas não vou te dizer quais.',
+    '22h e 23h. Nosso horário oficial. Sem combinar.',
+    '281 mil coisas. Todas a mesma. Todas suas.',
+    'Tem um número que importa. Tem 6 dígitos. E ele só cresce.',
+    'Eu li tudo. Eu contei tudo. Você não tinha ideia.',
+    'Uma data, há 2 anos, mudou alguma coisa. Você não percebeu.',
+    'Quase 15 meses. Todos os dias. Nem um vazio.',
+    'Eu nem sabia que ia virar isso. Mas virou.',
+    'O começo é em setembro. O fim... ainda não tem.',
+  ];
+  // Pool of "anti-clues" (COROA loses) — funny negations
+  const COIN_TAILS = [
+    'Não cabe numa caixa de presente.',
+    'Não tem cheiro.',
+    'Não vai estragar.',
+    'Não dá pra comprar isso.',
+    'Não é flores. Não é joia. Não é viagem.',
+    'Não é nada que se segura na mão.',
+    'Não pesa nada. E pesa tudo.',
+    'Não tem como embrulhar.',
+    'Não é comida (que pena, né?).',
+    'Não é roupa. Você já tem roupa demais.',
+    'Não tem cor. Mas tem muita cor.',
+    'Não tem entrega de Amazon pra isso.',
+  ];
+  
   function buildCoinHTML(nextCd, nextLabel){
     return `
       <p class="sp-modal-eyebrow">2 de junho · 18h</p>
       <div class="sp-modal-icon">🪙</div>
       <h2 class="sp-modal-title">Cara ou coroa?</h2>
-      <p class="sp-modal-text">Vou te fazer uma pergunta. Joga a moeda — se der cara, te dou uma dica de verdade. Se der coroa, fica curiosa mais um dia 😏</p>
+      <p class="sp-modal-text">Vou te dar 5 chances. Cada giro revela alguma coisa — Cara é dica de verdade, Coroa é o que NÃO é. Mas atenção: <strong style="color:#F5D0DC">só pode jogar uma vez por dia</strong>, mesmo se você recarregar 😏</p>
       <div class="sp-coin"><div class="sp-coin-inner" id="sp-coin-inner">
         <div class="sp-coin-face heads">★</div>
         <div class="sp-coin-face tails">♛</div>
       </div></div>
       <button class="sp-coin-btn" id="sp-coin-btn" onclick="window.flipCoin()">🪙 Jogar moeda</button>
       <div class="sp-coin-result" id="sp-coin-result"></div>
+      <div id="sp-coin-history" style="margin-top:12px"></div>
       ${nextCd ? `<p class="sp-modal-next">próxima pista: ${nextLabel} (${nextCd})</p>` : `<p class="sp-modal-next">próxima: dia ${nextLabel} ✨</p>`}
       <button class="sp-modal-close" onclick="closeSpoilerModal()">Fechar ❤️</button>
     `;
   }
   
-  let coinFlipsToday = 0;
+  // Persistence keys
+  const COIN_STATE_KEY = 'gi_coin_state_v2';
+  function loadCoinState(){
+    try {
+      const raw = localStorage.getItem(COIN_STATE_KEY);
+      if(!raw) return { flips: 0, history: [], usedHeads: [], usedTails: [] };
+      return JSON.parse(raw);
+    } catch(e){ return { flips: 0, history: [], usedHeads: [], usedTails: [] }; }
+  }
+  function saveCoinState(state){
+    try { localStorage.setItem(COIN_STATE_KEY, JSON.stringify(state)); } catch(e){}
+  }
+  
+  // Restore on modal open
+  function restoreCoinHistory(){
+    const state = loadCoinState();
+    const btn = document.getElementById('sp-coin-btn');
+    const result = document.getElementById('sp-coin-result');
+    const history = document.getElementById('sp-coin-history');
+    if(!btn) return;
+    // Render history
+    if(state.history.length > 0){
+      history.innerHTML = '<p style="font-size:11px;color:rgba(255,255,255,.4);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px;text-align:center">o que já saiu pra você</p>' +
+        state.history.map(h => 
+          `<div style="background:${h.heads ? 'rgba(194,71,107,.1)' : 'rgba(255,255,255,.04)'};border:1px solid ${h.heads ? 'rgba(194,71,107,.25)' : 'rgba(255,255,255,.08)'};border-radius:10px;padding:10px 14px;margin-bottom:6px;font-size:13px;color:${h.heads ? '#F5D0DC' : 'rgba(255,255,255,.65)'};font-style:italic;line-height:1.5">
+            <span style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:${h.heads ? '#C2476B' : 'rgba(255,255,255,.4)'};font-style:normal;font-weight:500;display:block;margin-bottom:4px">${h.heads ? '🎉 CARA · pista' : '😏 COROA · não é isso'}</span>
+            "${h.msg}"
+          </div>`
+        ).join('');
+    }
+    // Update button state
+    if(state.flips >= 5){
+      btn.disabled = true;
+      btn.textContent = '✨ Acabou — volta amanhã';
+    } else {
+      btn.textContent = state.flips === 0 ? '🪙 Jogar moeda' : `🪙 Jogar de novo (${state.flips}/5)`;
+    }
+  }
+  
   window.flipCoin = function(){
     const inner = document.getElementById('sp-coin-inner');
     const btn = document.getElementById('sp-coin-btn');
     const result = document.getElementById('sp-coin-result');
+    const history = document.getElementById('sp-coin-history');
     if(!inner || btn.disabled) return;
     
+    const state = loadCoinState();
+    if(state.flips >= 5){
+      btn.disabled = true;
+      btn.textContent = '✨ Acabou';
+      return;
+    }
+    
     btn.disabled = true;
-    coinFlipsToday++;
     result.classList.remove('on');
     
     const isHeads = Math.random() < 0.5;
@@ -1359,29 +1437,40 @@ body.dark .mood-inner{background:#1A1118}
     if(navigator.vibrate) navigator.vibrate([20, 10, 20, 10, 30]);
     
     setTimeout(() => {
+      // Pick a random message from the pool that hasn't been used yet
+      let msg;
       if(isHeads){
-        const hints = [
-          { text: 'CARA! 🎉 A palavra-chave começa com a letra:', reveal: 'N' },
-          { text: 'CARA de novo! Tem outra letra:', reveal: 'É' },
-          { text: 'Mais uma cara! Vai:', reveal: 'M' },
-        ];
-        const i = Math.min(coinFlipsToday - 1, hints.length - 1);
-        result.innerHTML = `${hints[i].text}<span class="reveal">${hints[i].reveal}</span><p style="font-size:12px;color:rgba(255,255,255,.5);margin-top:8px">você consegue juntar?</p>`;
+        const available = COIN_HEADS
+          .map((m, i) => ({ m, i }))
+          .filter(x => !state.usedHeads.includes(x.i));
+        const pick = available[Math.floor(Math.random() * available.length)] || { m: COIN_HEADS[0], i: 0 };
+        msg = pick.m;
+        state.usedHeads.push(pick.i);
+        result.innerHTML = `<span style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#C2476B;font-weight:500;display:block;margin-bottom:8px">🎉 CARA — uma pista de verdade</span><span style="font-family:'Playfair Display',serif;font-style:italic;font-size:17px;color:#F5D0DC;line-height:1.6">"${msg}"</span><p style="font-size:11px;color:rgba(255,255,255,.4);margin-top:10px;font-style:italic">mas isso ainda não diz tudo... ✨</p>`;
       } else {
-        const msgs = [
-          'COROA! 😏 Sem dica hoje. Tenta de novo?',
-          'COROA de novo! A sorte tá contra você hoje.',
-          'COROA pela terceira vez! Que azar 😂 mas perto, perto...',
-        ];
-        const i = Math.min(coinFlipsToday - 1, msgs.length - 1);
-        result.innerHTML = msgs[i];
+        const available = COIN_TAILS
+          .map((m, i) => ({ m, i }))
+          .filter(x => !state.usedTails.includes(x.i));
+        const pick = available[Math.floor(Math.random() * available.length)] || { m: COIN_TAILS[0], i: 0 };
+        msg = pick.m;
+        state.usedTails.push(pick.i);
+        result.innerHTML = `<span style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.55);font-weight:500;display:block;margin-bottom:8px">😏 COROA — o que NÃO é</span><span style="font-family:'Playfair Display',serif;font-style:italic;font-size:17px;color:rgba(255,255,255,.75);line-height:1.6">"${msg}"</span><p style="font-size:11px;color:rgba(255,255,255,.4);margin-top:10px;font-style:italic">também é uma pista... mas pela contramão 😉</p>`;
       }
       result.classList.add('on');
-      if(coinFlipsToday < 5){
-        btn.disabled = false;
-        btn.textContent = `🪙 Jogar de novo (${coinFlipsToday}/5)`;
+      
+      // Save to history & state
+      state.history.push({ heads: isHeads, msg });
+      state.flips++;
+      saveCoinState(state);
+      
+      // Update history display
+      restoreCoinHistory();
+      
+      if(state.flips >= 5){
+        btn.disabled = true;
+        btn.textContent = '✨ Acabou — você usou suas 5 chances';
       } else {
-        btn.textContent = 'Acabou! Volta amanhã 🌙';
+        btn.disabled = false;
       }
     }, 2100);
   };
